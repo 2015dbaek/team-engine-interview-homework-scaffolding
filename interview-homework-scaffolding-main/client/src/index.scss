@@ -1,0 +1,185 @@
+
+// Colors
+$primary: #455a64;
+$primary-highlight: #607d8b;
+$secondary: #e64a19;
+$secondary-highlight: #ff3d00;
+$white: #ffffff;
+$offWhite: #f7f7f7;
+$black: #000000;
+$red: #e45050;
+$gray: #737272;
+$lightGray: #e0e0e0;
+$lightGray-highlight: #e6e6e6;
+$green: #81c784;
+$yellow: #f9ce4f;
+$purple: #dfc8ff;
+$transparent: transparent;
+
+// Utilities
+.u-alignItems-center { align-items: center }
+.u-alignItems-flexEnd { align-items: flex-end }
+.u-alignItems-flexStart { align-items: flex-start }
+.u-alignItems-stretch { align-items: stretch }
+.u-alignSelf-flexEnd { align-self: flex-end }
+.u-alignSelf-flexStart { align-self: flex-start }
+.u-border-top { border-top: 1px solid $lightGray; }
+.u-border-bottom { border-bottom: 1px solid $lightGray; }
+.u-borderRadius-3 { border-radius: 3px }
+.u-borderRadius-5 { border-radius: 5px }
+.u-borderRadius-15 { border-radius: 15px }
+.u-boxShadow-topLeft { box-shadow: -2px -2px 4px 0px #21212130 }
+.u-color-inherit { color: inherit }
+.u-content { content: '' }
+.u-cursor-pointer { cursor: pointer }
+.u-display-flex { display: flex }
+.u-display-inline { display: inline }
+.u-display-block { display: block }
+.u-display-inlineBlock { display: inline-block }
+.u-display-inlineFlex { display: inline-flex }
+.u-flex-auto { flex: auto }
+.u-flex-none { flex: none }
+.u-flexBasis-0 { flex-basis: 0 }
+.u-flexBasis-auto { flex-basis: auto }
+.u-flexDirection-column { flex-direction: column }
+.u-flexDirection-rowReverse { flex-direction: row-reverse }
+.u-flexGrow-1 { flex-grow: 1 }
+.u-flexShrink-0 { flex-shrink: 0 }
+.u-flexWrap-wrap { flex-wrap: wrap }
+.u-float-left { float: left }
+.u-float-right { float: right }
+.u-fontWeight-300 { font-weight: 300 }
+.u-fontWeight-500 { font-weight: 500 }
+.u-fontWeight-700 { font-weight: 700 }
+.u-height-100 { height: 100% }
+.u-height-0 { height: 0 }
+.u-justifyContent-flexEnd { justify-content: flex-end }
+.u-justifyContent-flexStart { justify-content: flex-start }
+.u-justifyContent-center { justify-content: center }
+.u-justifyContent-spaceBetween { justify-content: space-between }
+.u-lineHeight-1 { line-height: 1 }
+.u-lineHeight-15 { line-height: 1.5 }
+.u-margin-0Auto { margin: 0 auto }
+.u-margin-bottom-clearChat { margin-bottom: 95px }
+.u-overflow-auto { overflow: auto }
+.u-overflow-hidden { overflow: hidden }
+.u-overflowX-scroll { overflow-x: scroll }
+.u-overflowY-auto { overflow-y: auto }
+.u-overflowY-scroll { overflow-y: scroll }
+.u-position-relative { position: relative }
+.u-position-absolute { position: absolute }
+.u-position-sticky {  position: sticky }
+.u-textAlign-center { text-align: center }
+.u-textAlign-initial { text-align: initial }
+.u-textAlign-left { text-align: left }
+.u-textAlign-right { text-align: right }
+.u-textDecoration-underline { text-decoration: underline }
+.u-textDecoration-lineThrough { text-decoration: line-through }
+.u-verticalAlign-middle { vertical-align: middle }
+.u-whiteSpace-pre { white-space: pre }
+.u-whiteSpace-preWrap { white-space: pre-wrap }
+.u-whiteSpace-nowrap { white-space: nowrap }
+.u-wordBreak-breakAll { word-break: break-all }
+.u-wordBreak-breakWord { word-break: break-word }
+
+.u-spread {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.u-hover-highlight {
+  &:hover {
+    background-color: rgba(0, 0 , 0 ,0.04);
+  }
+}
+
+// Pixel width and height utilities 50 to 1000 in increments of 50px (including min's and max's)
+// u-width-50px, u-minWidth-50px, u-maxWidth-50px, u-minHeight-50px, .u-maxHeight-50px
+$i: 50;
+@while $i <= 1000 {
+  .u-width-#{$i}px { width: #{$i}px }
+  .u-height-#{$i}px { width: #{$i}px }
+  .u-minWidth-#{$i}px { min-width: #{$i}px }
+  .u-maxWidth-#{$i}px { max-width: #{$i}px }
+  .u-minHeight-#{$i}px { min-height: #{$i}px }
+  .u-maxHeight-#{$i}px { max-height: #{$i}px }
+  $i: $i + 50;
+}
+
+// Percent width and maxWidth utilities 5 to 100 in increments of 5% (and 33% for thirds)
+.u-width-33 { width: 33% }
+$i: 5;
+@while $i <= 100 {
+  .u-width-#{$i} { width: #{$i}#{'%'} }
+  .u-maxWidth-#{$i} { max-width: #{$i}#{'%'} }
+  $i: $i + 5;
+}
+
+// Color utilities
+$colors: (
+  primary: $primary,
+  secondary: $secondary,
+  white: $white,
+  offWhite: $offWhite,
+  red: $red,
+  green: $green,
+  yellow: $yellow,
+  gray: $gray,
+  black: $black,
+  lightGray: $lightGray,
+  purple: $purple,
+  transparent: $transparent,
+);
+
+@each $name, $color in $colors {
+  .u-color-#{$name} { color: $color !important }
+  .u-background-#{$name} { background: $color !important }
+}
+
+// Margin and padding utility classes. This loop creates a handful of useful spacing
+// classes. Sizes are xs(3px), sm(5px), md(10px), lg(15px), xl(20px), 2x(30px).
+// Example usage:
+//  .u-margin - 10px margin on all sides
+//  .u-margin-top-xl - 20px margin on top
+//  .u-no-margin - no margin
+//  .u-padding-xs - 3px padding on all sides
+//  .u-padding-x - 10px margin on left and right
+//  .u-margin-y-xl - 20px margin on top and bottom
+
+$gutter-px: 10px;
+$gutter-keywords: margin padding;
+$gutter-directions: top right bottom left;
+$gutter-sizes: (
+  xs: 0.3,
+  sm: 0.5,
+  md: 1,
+  lg: 1.5,
+  xl: 2,
+  2x: 3
+);
+
+$gutter-keywords: margin padding;
+$gutter-directions: top right bottom left;
+
+@each $keyword in $gutter-keywords {
+  .u-#{$keyword} { #{$keyword}: 10px !important; }
+  .u-#{$keyword}-x { #{$keyword}-left: 10px !important; #{$keyword}-right: 10px !important; }
+  .u-#{$keyword}-y { #{$keyword}-top: 10px !important; #{$keyword}-bottom: 10px !important; }
+  .u-no-#{$keyword} { #{$keyword}: 0 !important; }
+
+  @each $size, $multiplier in $gutter-sizes {
+    .u-#{$keyword}-#{$size} { #{$keyword}: 10px * $multiplier !important; }
+    .u-#{$keyword}-x-#{$size} { #{$keyword}-left: 10px * $multiplier !important; #{$keyword}-right: 10px * $multiplier !important; }
+    .u-#{$keyword}-y-#{$size} { #{$keyword}-top: 10px * $multiplier !important; #{$keyword}-bottom: 10px * $multiplier !important; }
+  }
+
+  @each $direction in $gutter-directions {
+    .u-#{$keyword}-#{$direction} { #{$keyword}-#{$direction}: 10px !important; }
+    .u-no-#{$keyword}-#{$direction} { #{$keyword}-#{$direction}: 0 !important; }
+
+    @each $size, $multiplier in $gutter-sizes {
+      .u-#{$keyword}-#{$direction}-#{$size} { #{$keyword}-#{$direction}: 10px * $multiplier !important; }
+    }
+  }
+}

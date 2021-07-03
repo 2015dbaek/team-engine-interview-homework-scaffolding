@@ -1,0 +1,13 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "lib",
+    "src/**/*.test.js"
+  ],
+  "exec": "node --require dotenv/config --require @babel/register",
+  "watch": [
+    "src"
+  ],
+  "ext": "js,jsx"
+}

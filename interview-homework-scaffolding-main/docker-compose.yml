@@ -1,0 +1,13 @@
+version: '3.6'
+
+services:
+  server:
+    build: .
+    command: bash -c "cd server && yarn start"
+    volumes:
+       - .:/usr/app
+    ports:
+      - "6868:6868"
+      - "9043:9043"
+    restart: "no"
+

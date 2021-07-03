@@ -1,0 +1,16 @@
+node_modules/
+coverage/
+lib/
+dist/
+.env*
+*/.idea/*
+.idea/*
+
+.DS_Store
+yarn-error.log
+
+/local-certificates/*
+!.keep
+*.sw*
+
+redis-data/*

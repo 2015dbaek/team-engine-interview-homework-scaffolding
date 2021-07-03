@@ -1,0 +1,8 @@
+FROM node:10.14.1
+
+# Install Yarn
+RUN npm install -g yarn@1.9.4
+RUN npm install -g nodemon
+
+VOLUME /usr/app
+WORKDIR /usr/app
