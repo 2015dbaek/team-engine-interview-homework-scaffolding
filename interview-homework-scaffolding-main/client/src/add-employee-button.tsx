@@ -26,7 +26,7 @@ export const AddEmployeeButton = () => {
   };
 
   const handleCreateEmployee = async () => {
-    await Api.post('/employees', {
+    const response = await Api.post('/employees', {
       body: JSON.stringify({
         firstName,
         lastName,
@@ -37,6 +37,12 @@ export const AddEmployeeButton = () => {
         startDate,
       }),
     });
+    const employeeAdd = await response.json();
+    if(employeeAdd.error) { //could add an api UPDATE call here to instead update the user's info instead of an alert error
+      alert("Employee Already Exists!");
+    } else {
+      alert("Employee Added, check EmployeeList to find new Employee");
+    }
     setIsAddingEmployee(false);
   }
 

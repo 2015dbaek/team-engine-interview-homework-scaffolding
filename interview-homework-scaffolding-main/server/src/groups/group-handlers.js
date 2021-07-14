@@ -1,6 +1,10 @@
-
+import { GroupController } from './group-controller';
 export class GroupHandlers {
   static getAll = async (req, res, next) => {
-    throw new Error('Not Implemented');
+    const { employeeId } = req.query;
+    const groups = await GroupController.getAll({
+      employeeId
+    });
+    return res.json(groups);
   }
 }

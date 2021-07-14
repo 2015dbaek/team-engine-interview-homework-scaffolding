@@ -13,7 +13,7 @@ export const request = async (uri: string, method: string, opts: RequestInit): P
       } : {},
     },
   );
-
+  
   const requestOptions: RequestInit = {
     headers,
     method,

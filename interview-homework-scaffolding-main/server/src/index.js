@@ -15,7 +15,7 @@ app.use(compression());
 app.use(cookieParser());
 app.use(cors({
   credentials: true,
-  origin: [DOMAIN],
+  origin: '*',
 }));
 app.options('*', cors());
 

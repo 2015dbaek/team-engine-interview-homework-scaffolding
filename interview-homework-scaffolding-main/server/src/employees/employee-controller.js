@@ -5,7 +5,7 @@ export class EmployeeController {
     const { employeeId } = opts;
     let employees = DataAccessController.employees.getAll();
     if (employeeId) {
-      return employees.find(e => e.id = employeeId);
+      return ((employees.find(e => e.employeeId === Number(employeeId)) == undefined)? null : employees.find(e => e.employeeId === Number(employeeId)));
     }
     return employees;
   };

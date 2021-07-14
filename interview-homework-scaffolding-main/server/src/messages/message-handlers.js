@@ -1,6 +1,10 @@
-
+import { MessageController } from './message-controller';
 export class MessageHandlers {
   static getAll = async (req, res, next) => {
-    throw new Error('Not Implemented');
+    const { employeeId } = req.query;
+    const messages = await MessageController.getAll({
+      employeeId
+    });
+    return res.json(messages);
   }
 }
