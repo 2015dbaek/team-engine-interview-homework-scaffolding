@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { AddEmployeeButton } from './add-employee-button';
-import { LoadEmployeesButton } from './load-employee-button';
+import { AddEmployeeButton } from './components/add-employee-button';
+import { LoadEmployeesButton } from './components/load-employee-button';
 
 
 export const LandingPage = () => {

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import { useTable, useSortBy } from 'react-table'
 import { COLUMNS } from './columns'
-import './table.css'
+import '../css/table.css'
 
 export const BasicTable = (props: { elist: any }) => {
 

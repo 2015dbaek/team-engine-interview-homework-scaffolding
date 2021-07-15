@@ -5,7 +5,7 @@ import CloseIcon from '@material-ui/icons/Close';
 
 import TextField from '@material-ui/core/TextField';
 
-import { Api } from './util/api';
+import { Api } from '../util/api';
 
 export const AddEmployeeButton = () => {
 
@@ -37,13 +37,13 @@ export const AddEmployeeButton = () => {
         startDate,
       }),
     });
+    setIsAddingEmployee(false);
     const employeeAdd = await response.json();
     if(employeeAdd.error) { //could add an api UPDATE call here to instead update the user's info instead of an alert error
-      alert("Employee Already Exists!");
+      return alert("Employee Already Exists!");
     } else {
       alert("Employee Added, check EmployeeList to find new Employee");
     }
-    setIsAddingEmployee(false);
   }
 
   return (

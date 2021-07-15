@@ -14,14 +14,13 @@ export class EmployeeHandlers {
     const lastName = req.body.lastName;
     const email = req.body.email;
     let employees = DataAccessController.employees.getAll();
-    if(employees.find(e => (e.firstName === firstName && e.lastName === lastName && e.email === email))) {
-      console.log("employee begone"); 
+    if (employees.find(e => (e.firstName === firstName && e.lastName === lastName && e.email === email))) {
+      console.log("employee begone");
       return res.status(400).json({ error: 'Employee Exists' });
-    }  
+    }
     var newEmployee = req.body
     newEmployee.employeeId = DataAccessController.employees.getAll().length + 1;
     DataAccessController.employees.add(newEmployee);
-    console.log(newEmployee);
-    return res.json(newEmployee); 
+    return res.json(newEmployee);
   }
 }

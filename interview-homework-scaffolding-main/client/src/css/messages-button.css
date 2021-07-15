@@ -1,0 +1,26 @@
+.message {
+    background-color:lightblue; 
+    margin: 0.75em 4em 0 0; 
+    border-radius: 0 1em 1em 1em; 
+    padding: 0.5em
+}
+
+.selfmessage {
+    background-color:salmon;
+    margin: 0.75em 0 0 4em;
+    border-radius: 1em 0em 1em 1em;
+    padding: 0.5em
+}
+
+.message > p, .selfmessage > p {margin: 0}
+
+.emptyMessage {
+    font-size: large; 
+    text-decoration: underline; 
+    text-align: center; 
+    font-weight: bold;
+}
+
+.messageName {
+    font-weight: bold;
+}
