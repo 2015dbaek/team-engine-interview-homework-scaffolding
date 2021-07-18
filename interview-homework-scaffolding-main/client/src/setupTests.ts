@@ -2,4 +2,17 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
+import React from 'react';
+import ReactDOM from'react-dom';
 import '@testing-library/jest-dom';
+import { LoadEmployeesButton } from './components/load-employee-button';
+
+/*it("render loadButton", () => {
+    const div = document.createElement("div");
+    ReactDOM.render(<LoadEmployeesButton/>);
+});
+
+it("rendered loadButton", () => {
+    const { getByTestId } = render(<LoadEmployeesButton/>);
+});
+*/

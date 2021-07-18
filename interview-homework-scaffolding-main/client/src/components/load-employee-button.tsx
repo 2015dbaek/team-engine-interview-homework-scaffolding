@@ -34,14 +34,26 @@ export const LoadEmployeesButton = () => {
 
   const handleClickLoadingEmployee = async () => {
     var idCheck = true;
-    var num = prompt("Enter Employee ID: ", ""); //prompts can be textfields and alerts can be dialog boxes
+    var num = prompt("Enter Employee ID or Employee First and Last Name: ", ""); //prompts can be textfields and alerts can be dialog boxes
     while (idCheck) {
       if (num == null) { //to exit out of prompt
         idCheck = false;
         return;
       }
-      if (isNaN(parseInt(num))) { //could add implementation for employee name search
-        num = prompt("Invalid Employee ID, Enter again: ", "");
+      if (isNaN(parseInt(num))) { //could add implementation for employee name search and anti-code injection/input validation
+        //num = prompt("Invalid Employee ID, Enter again: ", "");
+        const name = (num?num.split(" "):[]);
+        console.log(name[0] + " " + name[1]);
+        const response = await Api.get('/employees?firstName=' + name[0] + '&lastName=' + name[1]); 
+        const employee = await response.json();
+        if(employee == null){
+          num = prompt("Invalid Name, Enter again:", "");
+        } else {
+          idCheck = false;
+          setLoadEmployee(employee);
+          console.log(employee);
+          setIsLoadingEmployee(true); 
+        }
       } else {
         const response = await Api.get('/employees?employeeId=' + num);
         const employee = await response.json();
@@ -61,9 +73,24 @@ export const LoadEmployeesButton = () => {
     setLoadGroups(groups);
   };
 
-  /*const handleTextFieldChange = (fieldSetter: (newValue: string) => void) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    fieldSetter(event.target.value);
-  };*/
+  const outputEmployee = () => {
+    return (
+      <div>
+      <p className="employeeNameLoad">{loadEmployee ? loadEmployee.firstName + " " + loadEmployee.lastName +
+      (loadEmployee.nickname ? " (" + loadEmployee.nickname + ")" : "") : "Loading Employee Info..."}</p>
+    <div className="employeeInfoLoad">
+      <p>Employee ID: <span className="boldInfoLoad"> {" " + loadEmployee.employeeId + " "} </span>
+      | Email: <span className="boldInfoLoad">{" " + loadEmployee.email + " "}</span> 
+      | Telephone: <span className="boldInfoLoad">{" " + (loadEmployee.phoneNumber === "" ? "Unknown" : loadEmployee.phoneNumber) + " "}</span>
+      </p>
+      <p>Job Title:  <span className="boldInfoLoad">{" " + (loadEmployee.jobTitle === "" ? "Unknown" : loadEmployee.jobTitle) + " "}</span></p>
+      <p>Start Date: <span className="boldInfoLoad">{" " + (loadEmployee.startDate === "" ? "Unknown" : loadEmployee.startDate.split("T").shift()) + " "}</span></p>
+    <p>Department(s): {loadGroups ? (loadGroups.length === 0 ? <span className="boldInfoLoad">Employee does not belong to a Department</span> :
+    loadGroups.map((groupsN) => <span className="boldInfoLoad"> {" " + groupsN + ", "} </span>)) : "Loading Groups Info..."}</p>
+    </div>
+    </div>
+    )
+  }
 
   return (
     <>
@@ -103,18 +130,7 @@ export const LoadEmployeesButton = () => {
             <CloseIcon className="u-cursor-pointer" onClick={handleCloseDialogS} />
           </div>
           <div className="u-padding-lg">
-            <p className="employeeNameLoad">{loadEmployee ? loadEmployee.firstName + " " + loadEmployee.lastName +
-              (loadEmployee.nickname ? " (" + loadEmployee.nickname + ")" : "") : "Loading Employee Info..."}</p>
-            <div className="employeeInfoLoad">
-              <p>Employee ID: <span className="boldInfoLoad"> {" " + loadEmployee.employeeId + " "} </span>
-              | Email: <span className="boldInfoLoad">{" " + loadEmployee.email + " "}</span> 
-              | Telephone: <span className="boldInfoLoad">{" " + (loadEmployee.phoneNumber === "" ? "Unknown" : loadEmployee.phoneNumber) + " "}</span>
-              </p>
-              <p>Job Title:  <span className="boldInfoLoad">{" " + (loadEmployee.jobTitle === "" ? "Unknown" : loadEmployee.jobTitle) + " "}</span></p>
-              <p>Start Date: <span className="boldInfoLoad">{" " + (loadEmployee.startDate === "" ? "Unknown" : loadEmployee.startDate.split("T").shift()) + " "}</span></p>
-            <p>Department(s): {loadGroups ? (loadGroups.length === 0 ? "Employee does not belong to a Department" :
-            loadGroups.map((groupsN) => <span className="boldInfoLoad"> {" " + groupsN + ", "} </span>)) : "Loading Groups Info..."}</p>
-            </div>
+            {outputEmployee()}
           </div>
           <MessagesButton employee={loadEmployee} />
         </Dialog>
