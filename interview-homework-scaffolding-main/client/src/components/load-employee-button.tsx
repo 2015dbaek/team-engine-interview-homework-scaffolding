@@ -95,6 +95,7 @@ export const LoadEmployeesButton = () => {
   return (
     <>
       <Button
+      data-testid="loadEmployeesButtonTest"
         size="medium"
         variant="contained"
         color="secondary"
@@ -103,7 +104,7 @@ export const LoadEmployeesButton = () => {
         Load Employees
       </Button>
       {isLoadingEmployees ? (
-        <Dialog open onClose={handleCloseDialog} disableEnforceFocus fullScreen>
+        <Dialog open onClose={handleCloseDialog} disableEnforceFocus fullScreen data-testid="loadEmployeesDialogueTest">
           <div className={`u-display-flex u-alignItems-center u-background-primary typo-h6 u-color-white u-padding u-justifyContent-spaceBetween`}>
             <div style={{ width: '24px' }} />
             <div>Employee List</div>
@@ -114,6 +115,7 @@ export const LoadEmployeesButton = () => {
       ) : null}
 
       <Button
+      data-testid="loadEmployeeButtonTest"
         className="u-margin-left-md"
         size="medium"
         variant="contained"
@@ -123,7 +125,7 @@ export const LoadEmployeesButton = () => {
         Load Single Employee
       </Button>
       {isLoadingEmployee ? (
-        <Dialog open onClose={handleCloseDialogS} disableEnforceFocus>
+        <Dialog open onClose={handleCloseDialogS} disableEnforceFocus data-testid="loadEmployeeDialogueTest">
           <div className={`u-display-flex u-alignItems-center u-background-primary typo-h6 u-color-white u-padding u-justifyContent-spaceBetween`}>
             <div style={{ width: '24px' }} />
             <div>Employee</div>

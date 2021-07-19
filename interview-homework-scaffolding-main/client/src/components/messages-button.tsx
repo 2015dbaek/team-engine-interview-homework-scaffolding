@@ -19,6 +19,7 @@ export const MessagesButton = (props: { employee: any }) => {
     <div>
       <div className="u-padding-lg">
         <Button
+        data-testid="messagesButtonTest"
           size="medium"
           variant="contained"
           color="secondary"

@@ -7,7 +7,7 @@ import ReactDOM from'react-dom';
 import '@testing-library/jest-dom';
 import { LoadEmployeesButton } from './components/load-employee-button';
 
-/*it("render loadButton", () => {
+it("render loadButton", () => {
     const div = document.createElement("div");
     ReactDOM.render(<LoadEmployeesButton/>);
 });
@@ -15,4 +15,3 @@ import { LoadEmployeesButton } from './components/load-employee-button';
 it("rendered loadButton", () => {
     const { getByTestId } = render(<LoadEmployeesButton/>);
 });
-*/

@@ -39,6 +39,7 @@ export const AddEmployeeButton = () => {
     });
     setIsAddingEmployee(false);
     const employeeAdd = await response.json();
+    //how to check if alert shows exist/or added employee?
     if(employeeAdd.error) { //could add an api UPDATE call here to instead update the user's info instead of an alert error
       return alert("Employee Already Exists!");
     } else {
@@ -49,6 +50,7 @@ export const AddEmployeeButton = () => {
   return (
     <>
       <Button
+      data-testid="addEmployeeButtonTest"
         size="medium"
         variant="contained"
         color="secondary"
@@ -57,7 +59,7 @@ export const AddEmployeeButton = () => {
         Add Employee +
       </Button>
       {isAddingEmployee ? (
-        <Dialog open onClose={handleCloseDialog} disableEnforceFocus>
+        <Dialog open onClose={handleCloseDialog} disableEnforceFocus data-testid="addEmployeeDialogueTest">
           <div className={`u-display-flex u-alignItems-center u-background-primary typo-h6 u-color-white u-padding u-justifyContent-spaceBetween`}>
             <div style={{ width: '24px' }} />
             <div>Add New Employee</div>
