@@ -20,3 +20,11 @@
 .boldInfoLoad {
     font-weight: bold;
 }
+
+.searchEmployeeTitle {
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    padding-top: .5em;
+    padding-bottom: .5em;
+}

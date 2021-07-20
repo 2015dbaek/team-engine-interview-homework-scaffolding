@@ -22,7 +22,7 @@ export const BasicTable = (props: { elist: any }) => {
 
     return(
         <div>
-            <table {...getTableProps()}>
+            <table {...getTableProps()} data-testid="tableTest">
               <thead>
                   {headerGroups.map((headerGroup) => (
                 <tr {...headerGroup.getHeaderGroupProps()}>

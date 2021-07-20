@@ -10,6 +10,7 @@ import { Api } from '../util/api';
 export const AddEmployeeButton = () => {
 
   const [isAddingEmployee, setIsAddingEmployee] = useState<boolean>(false);
+  const [addEmployeeNotification, setAddEmployeeNotification] = useState<string>('');
   const handleClickAddingEmployee = () => setIsAddingEmployee(true);
   const handleCloseDialog = () => setIsAddingEmployee(false);
 
@@ -37,13 +38,31 @@ export const AddEmployeeButton = () => {
         startDate,
       }),
     });
-    setIsAddingEmployee(false);
-    const employeeAdd = await response.json();
-    //how to check if alert shows exist/or added employee?
-    if(employeeAdd.error) { //could add an api UPDATE call here to instead update the user's info instead of an alert error
-      return alert("Employee Already Exists!");
+    if (firstName.length === 0) {
+        setAddEmployeeNotification("Need a first name");
+    } else if (lastName.length === 0) {
+      setAddEmployeeNotification("Need a last name");
+    } else if (email.length === 0) {
+      setAddEmployeeNotification("Need an email");
     } else {
-      alert("Employee Added, check EmployeeList to find new Employee");
+        const employeeAdd = await response.json();
+        //how to check if alert shows exist/or added employee?
+        if(employeeAdd.error) {
+            setAddEmployeeNotification("Employee Already Exists!");
+        } else {
+            setAddEmployeeNotification("Successfully added employee");
+            setFirstName(''); //reset names and empty fields
+            setLastName('');
+            setNickname('');
+            setPhoneNumber('');
+            setEmail('');
+            setJobTitle('');
+            setStartDate('');
+            var inputs = document.getElementsByTagName("input");
+            for (let i = 0; i < inputs.length ; i++) {
+                inputs[i].value = "";
+            }
+        }
     }
   }
 
@@ -68,24 +87,31 @@ export const AddEmployeeButton = () => {
           <div className="u-padding-lg">
             <div className="u-padding">
               <TextField
+                data-testid="inputFirstNameTest"
                 variant="outlined"
                 label="First Name"
                 required
+                error={firstName.length === 0 ? true : false }
+                helperText={firstName.length === 0 ? "This field cannot be empty!" : false}
                 value={firstName}
                 onChange={handleTextFieldChange(setFirstName)}
               />
             </div>
             <div className="u-padding">
               <TextField
+                data-testid="inputLastNameTest"
                 variant="outlined"
                 label="Last Name"
                 required
+                error={lastName.length === 0 ? true : false }
+                helperText={lastName.length === 0 ? "This field cannot be empty!" : false}
                 value={lastName}
                 onChange={handleTextFieldChange(setLastName)}
               />
             </div>
             <div className="u-padding">
               <TextField
+                data-testid="inputNicknameTest"
                 variant="outlined"
                 label="Nickname"
                 value={nickname}
@@ -94,6 +120,7 @@ export const AddEmployeeButton = () => {
             </div>
             <div className="u-padding">
               <TextField
+                data-testid="inputPhoneNumberTest"
                 variant="outlined"
                 label="Phone Number"
                 value={phoneNumber}
@@ -102,14 +129,19 @@ export const AddEmployeeButton = () => {
             </div>
             <div className="u-padding">
               <TextField
+                data-testid="inputEmailTest"
                 variant="outlined"
                 label="Email"
+                required
+                error={email.length === 0 ? true : false }
+                helperText={email.length === 0 ? "This field cannot be empty!" : false}
                 value={email}
                 onChange={handleTextFieldChange(setEmail)}
               />
             </div>
             <div className="u-padding">
               <TextField
+                data-testid="inputJobTitleTest"
                 variant="outlined"
                 label="Job Title"
                 value={jobTitle}
@@ -118,15 +150,20 @@ export const AddEmployeeButton = () => {
             </div>
             <div className="u-padding">
               <TextField
+                data-testid="inputStartDateTest"
                 variant="outlined"
                 label="Start Date"
                 value={startDate}
                 onChange={handleTextFieldChange(setStartDate)}
               />
             </div>
+            <div className="u-padding">
+                <div data-testid="addEmployeeResponse">{addEmployeeNotification ? addEmployeeNotification : ""}</div>
+            </div>
           </div>
           <div className="u-display-flex u-alignItems-center u-padding-lg u-no-padding-top u-justifyContent-flexEnd">
             <Button
+              data-testid="testCancelAddEmployeeButton"
               size="medium"
               variant="contained"
               color="default"
@@ -135,6 +172,7 @@ export const AddEmployeeButton = () => {
               Cancel
             </Button>
             <Button
+              data-testid="addEmployeeButtonFinal"
               className="u-margin-left-md"
               size="medium"
               variant="contained"
